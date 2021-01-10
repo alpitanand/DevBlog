@@ -28,16 +28,16 @@ module.exports = {
       if (_.isEmpty(email) || _.isEmpty(password) || _.isEmpty(name))
         return res
           .status(400)
-          .json({ msg: "Not all fields have been entered." });
+          .json({ message: "Not all fields have been entered." });
 
       if (password.length < 5)
         return res.status(400).json({
-          msg: "The password needs to be at least 5 characters long.",
+          message: "The password needs to be at least 5 characters long.",
         });
       const existingUser = await findUserByEmail(email);
       if (!_.isEmpty(existingUser)) {
         return res.status(400).json({
-          msg: "An account with this email already exists.",
+          message: "An account with this email already exists.",
         });
       }
 
@@ -52,7 +52,7 @@ module.exports = {
     } catch (error) {
       console.log(error);
       return res.status(500).json({
-        msg: "Some error occured while registering, please try again later",
+        message: "Some error occured while registering, please try again later",
       });
     }
   },
@@ -64,25 +64,25 @@ module.exports = {
       if (_.isEmpty(email) || _.isEmpty(password))
         return res
           .status(400)
-          .json({ msg: "Not all fields have been entered." });
+          .json({ message: "Not all fields have been entered." });
 
       if (password.length < 5)
         return res.status(400).json({
-          msg: "The password needs to be at least 5 characters long.",
+          message: "The password needs to be at least 5 characters long.",
         });
 
       const isUserPresent = await findUserByEmail(email);
 
       if (_.isEmpty(isUserPresent)) {
         return res.status(400).json({
-          msg: "An account with this email is not present",
+          message: "An account with this email is not present",
         });
       }
 
       const isMatch = await compare(password, isUserPresent.hashedPassword);
 
       if (!isMatch) {
-        return res.status(400).json({ msg: "Invalid credentials." });
+        return res.status(400).json({ message: "Invalid credentials." });
       }
       let userId = isUserPresent._id;
       const token = await sign({userId}, JWT_SECRET);
@@ -95,7 +95,7 @@ module.exports = {
     } catch (error) {
       console.log(error);
       return res.status(500).json({
-        msg: "Some error occured while login in, please try again later",
+        message: "Some error occured while login in, please try again later",
       });
     }
   },
