@@ -18,6 +18,7 @@ const ArticleSchema = new mongoose.Schema(
     userId: {
       type: Schema.Types.ObjectId,
       ref: "User",
+      required: true
     },
     tags: [{ type: String }],
   },

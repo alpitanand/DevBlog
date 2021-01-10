@@ -1,4 +1,4 @@
-var { getArticleFeed } = require("../dao/article");
+var { getArticleFeed, save } = require("../dao/article");
 const _ = require("lodash");
 
 module.exports = {
@@ -28,15 +28,29 @@ module.exports = {
                     .status(400)
                     .json({ message: "Not all fields have been entered" });
             }
+            if(title.length>20||title.length<5){
+                return res
+                    .status(400)
+                    .json({ message: "Insufficiant title length" });
+            }
 
-            console.log(title);
-            console.log(text);
-            console.log(user);
-            console.log(tags);
+            let textPreview = text.substring(0,30);
+            let userId = user.userId;
+            const article = {
+              title,
+              text,
+              userId,
+              textPreview,
+              tags
+            }
 
-            return res.status(200).json({message: "All fields recieved"});
+            let savedArticle = await save(article)
+            if(savedArticle.errors){
+                console.log(savedArticle.errors)
+                return res.status(400).json(savedArticle._message);
+            }
+            return res.status(200).json(savedArticle);
         } catch (error) {
-            console.log(error);
             return res.status(500).json({
                 msg:
                     "Some error occured while saving article, please try again later",
