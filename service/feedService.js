@@ -9,7 +9,13 @@ module.exports = {
                 page = 0;
             }
             let articles = await getArticleFeed(page);
-            return articles;
+            if (articles.errors) {
+                return res.status(400).json({
+                    message:
+                        "Some error occured while getting news feed, please try again later",
+                });
+            }
+            return res.status(200).json(articles);
         } catch (error) {
             console.log(error);
             return res.status(500).json({
@@ -28,25 +34,25 @@ module.exports = {
                     .status(400)
                     .json({ message: "Not all fields have been entered" });
             }
-            if(title.length>20||title.length<5){
+            if (title.length > 20 || title.length < 5) {
                 return res
                     .status(400)
                     .json({ message: "Insufficiant title length" });
             }
 
-            let textPreview = text.substring(0,30);
+            let textPreview = text.substring(0, 30);
             let userId = user.userId;
             const article = {
-              title,
-              text,
-              userId,
-              textPreview,
-              tags
-            }
+                title,
+                text,
+                userId,
+                textPreview,
+                tags,
+            };
 
-            let savedArticle = await save(article)
-            if(savedArticle.errors){
-                console.log(savedArticle.errors)
+            let savedArticle = await save(article);
+            if (savedArticle.errors) {
+                console.log(savedArticle.errors);
                 return res.status(400).json(savedArticle._message);
             }
             return res.status(200).json(savedArticle);
