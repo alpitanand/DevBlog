@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
 const ArticleSchema = new mongoose.Schema(
   {
@@ -16,14 +17,9 @@ const ArticleSchema = new mongoose.Schema(
     },
     userId: {
       type: Schema.Types.ObjectId,
-      ref: "Article",
+      ref: "User",
     },
     tags: [{ type: String }],
-    date_of_joining: {
-      type: Date,
-      default: Date.now,
-    },
-    articles: [{ type: Schema.Types.ObjectId, ref: "Article" }],
   },
   { timestamps: { createdAt: "createdAt", updatedAt: "lastUpdatedAt" } }
 );

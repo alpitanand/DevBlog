@@ -84,7 +84,8 @@ module.exports = {
       if (!isMatch) {
         return res.status(400).json({ msg: "Invalid credentials." });
       }
-      const token = await sign({ email}, JWT_SECRET);
+      let userId = isUserPresent._id;
+      const token = await sign({userId}, JWT_SECRET);
       res.json({
         token,
         email,

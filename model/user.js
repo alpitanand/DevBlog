@@ -15,7 +15,7 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  date_of_joining: {
+  dateOfJoining: {
     type: Date,
     default: Date.now,
   },
