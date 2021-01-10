@@ -12,6 +12,10 @@ app.use(cors());
 
 app.use("/api", routes);
 
+app.get('/health',(req, res)=>{
+  res.status(200).json({message:"Server is up"})
+})
+
 const port = process.env.PORT;
 const dbUrl = process.env.DB_URL;
 
