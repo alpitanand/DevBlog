@@ -4,6 +4,7 @@
 Note-> For all authenticated routes pass token in the header with the key "token"
 
 Login url => POST => https://devblogf.herokuapp.com/api/users/login
+
   Demo Payload = 
   ```` 
   { 
@@ -14,6 +15,7 @@ Login url => POST => https://devblogf.herokuapp.com/api/users/login
   ````
 
 Register url => POST => https://devblogf.herokuapp.com/api/users/register
+
   Demo Payload = 
   ```` 
   { 
