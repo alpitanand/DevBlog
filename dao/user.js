@@ -9,5 +9,9 @@ module.exports = {
 
     findUserByEmail: async (email) =>{
         return await User.findOne({email:email});
-    } 
+    },
+    
+    finduserByID: async (id) =>{
+        return User.findById(id);
+    }
 }
