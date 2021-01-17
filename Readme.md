@@ -1,4 +1,5 @@
 # Welcome to DevBlog!
+**Frontend Url** = https://dev-blog-git-main.rahulxyz.vercel.app/
 **Base Url** = https://devblogf.herokuapp.com/
 
 Note-> For all authenticated routes pass token in the header with the key "token"
