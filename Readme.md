@@ -27,6 +27,7 @@ Register url => POST => https://devblogf.herokuapp.com/api/users/register
 
 NewsFeed url => GET =>  https://devblogf.herokuapp.com/api/feed/newsFeed
 
+Get specific article => GET => https://devblogf.herokuapp.com/api/feed/newsFeed/:id
 
 Save Article => POST = > https://devblogf.herokuapp.com/api/feed/createArticle (Authenticated route)
 
