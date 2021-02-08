@@ -1,19 +1,19 @@
 const Article = require("../model/article");
 
 module.exports = {
-    save: async (articleData) => {
+    save: (articleData) => {
         const article = new Article(articleData);
         return article.save();
     },
 
-    getArticleFeed: async (page) => {
+    getArticleFeed: (page) => {
         let numberOfItemOnOnePage = 15;
         return Article.find({})
             .skip(page * numberOfItemOnOnePage)
             .limit(numberOfItemOnOnePage);
     },
 
-    findArticleByIDAndPopulate: async (articleID) => {
+    findArticleByIDAndPopulate: (articleID) => {
         return Article.findById(articleID).populate("userInfo", {
             email: 1,
             name: 1,
